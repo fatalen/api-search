@@ -5,7 +5,7 @@ class Movie extends Component {
     super(props);
     this.state = {
       movieId: null
-    }
+    };
   }
 
   render() {
