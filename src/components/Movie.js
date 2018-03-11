@@ -8,9 +8,9 @@ class Movie extends Component {
     };
   }
 
-  componentDidMount() {
-    this.fetchById(this.props.movieId);
-  }
+  // componentDidMount() {
+  //   this.fetchById(this.props.movieId);
+  // }
 
   componentWillReceiveProps(nextProps){
     if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
@@ -19,7 +19,7 @@ class Movie extends Component {
   }
 
   render() {
-    console.log(this.state.movie);
+    // console.log(this.state.movie);
     let content = (<div className="movie"></div>)
     if (this.state.movie) {
       content = (
@@ -45,7 +45,6 @@ class Movie extends Component {
             overview: data.overview,
             poster: poster
           }});
-          // console.log(this.state.movie);
         }
       })
       .catch(function(error) {

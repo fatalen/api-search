@@ -45,7 +45,7 @@ class List extends Component {
             listItems = data.results.map(item => {
               let poster = item.poster_path ? (<img src={"https://image.tmdb.org/t/p/w200"+item.poster_path} alt=""/>) : (<h4>no poster</h4>);
               return (
-                <li key={item.id} className="list__item">
+                <li key={item.id} className="list__item" data-id={item.id} onClick={this.props.returnMovieId}>
                   <h2>{item.title}</h2>
                   <h4>{item.id}</h4>
                   {poster}

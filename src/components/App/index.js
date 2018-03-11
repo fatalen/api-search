@@ -11,11 +11,12 @@ class App extends Component {
       searchTitle: 'cats',
       searchPage: 1,
       lastSearchSuccess: false,
-      movieId: 10992
+      movieId: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.searchByTitle = this.searchByTitle.bind(this);
     this.searchSuccess = this.searchSuccess.bind(this);
+    this.returnMovieId = this.returnMovieId.bind(this);
   }
 
   render() {
@@ -28,7 +29,12 @@ class App extends Component {
         <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
         <button name="buttonFirstPage" onClick={this.searchByTitle}>search</button>
         <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
-        <List searchTitle={this.state.searchTitle} searchPage={this.state.searchPage} searchSuccess={this.searchSuccess}/>
+        <List
+          searchTitle={this.state.searchTitle}
+          searchPage={this.state.searchPage}
+          searchSuccess={this.searchSuccess}
+          returnMovieId={this.returnMovieId}
+        />
         <button name="buttonPrevPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>prev page</button>
         <button name="buttonNextPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>next page</button>
         <div>{this.state.inputSearch}</div>
@@ -58,6 +64,13 @@ class App extends Component {
   searchSuccess(success = true) {
     this.setState({
       lastSearchSuccess: success
+    })
+  }
+  // функция возвращает id элемента списка
+  returnMovieId(e) {
+    // console.log(e.currentTarget.dataset.id);
+    this.setState({
+      movieId: e.currentTarget.dataset.id
     })
   }
 }
