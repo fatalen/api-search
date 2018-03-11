@@ -8,10 +8,12 @@ class App extends Component {
     this.state = {
       inputSearch: 'cats',
       searchTitle: null,
-      searchPage: 1
+      searchPage: 1,
+      lastSearchSuccess: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.searchByTitle = this.searchByTitle.bind(this);
+    this.searchSuccess = this.searchSuccess.bind(this);
   }
 
   render() {
@@ -23,9 +25,9 @@ class App extends Component {
         <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
         <button name="buttonFirstPage" onClick={this.searchByTitle}>search</button>
         <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
-        <List searchTitle={this.state.searchTitle} searchPage={this.state.searchPage}/>
-        <button name="buttonPrevPage" onClick={this.searchByTitle}>prev page</button>
-        <button name="buttonNextPage" onClick={this.searchByTitle}>next page</button>
+        <List searchTitle={this.state.searchTitle} searchPage={this.state.searchPage} searchSuccess={this.searchSuccess}/>
+        <button name="buttonPrevPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>prev page</button>
+        <button name="buttonNextPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>next page</button>
         <div>{this.state.inputSearch}</div>
       </div>
     );
@@ -47,6 +49,12 @@ class App extends Component {
     this.setState({
       searchTitle: this.state.inputSearch,
       searchPage: currentPage
+    })
+  }
+  // функция передается в компонент List чтобы возвращать результат выполнения поиска
+  searchSuccess(success = true) {
+    this.setState({
+      lastSearchSuccess: success
     })
   }
 }
