@@ -8,7 +8,7 @@ class App extends Component {
     this.state = {
       inputSearch: 'cats',
       searchTitle: null,
-      secondParameter: 'something'
+      searchPage: 1
     };
     this.handleChange = this.handleChange.bind(this);
     this.searchByTitle = this.searchByTitle.bind(this);
@@ -21,11 +21,11 @@ class App extends Component {
           <h1>API search</h1>
         </header>
         <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
-        <button onClick={this.searchByTitle}>search</button>
+        <button name="buttonFirstPage" onClick={this.searchByTitle}>search</button>
         <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
-        <List searchTitle={this.state.searchTitle}/>
-        <button>prev page</button>
-        <button>next page</button>
+        <List searchTitle={this.state.searchTitle} searchPage={this.state.searchPage}/>
+        <button name="buttonPrevPage" onClick={this.searchByTitle}>prev page</button>
+        <button name="buttonNextPage" onClick={this.searchByTitle}>next page</button>
         <div>{this.state.inputSearch}</div>
       </div>
     );
@@ -34,10 +34,19 @@ class App extends Component {
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
   }
-  // поиск по названию - searchTitle передается параметром в компонент List
-  searchByTitle() {
+  // поиск по названию - searchTitle и searchPage передаются параметрами в компонент List
+  searchByTitle(e) {
+    let currentPage = this.state.searchPage;
+    if (e.target.name === 'buttonPrevPage' && currentPage > 1) {
+      currentPage--;
+    } else if (e.target.name === 'buttonNextPage') {
+      currentPage++;
+    } else {
+      currentPage = 1;
+    }
     this.setState({
-      searchTitle: this.state.inputSearch
+      searchTitle: this.state.inputSearch,
+      searchPage: currentPage
     })
   }
 }
