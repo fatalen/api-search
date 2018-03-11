@@ -9,14 +9,14 @@ class List extends Component {
   }
 
   componentDidMount() {
-    this.fetchByTitle();
+    this.fetchByTitle(this.props.searchTitle, this.props.searchPage);
   }
 
   componentWillReceiveProps(nextProps){
     // запрос делается если какой-то из параметров компонента изменился
     if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
       this.fetchByTitle(nextProps.searchTitle, nextProps.searchPage);
-      console.log(nextProps);
+      // console.log(nextProps);
     }
   }
 
@@ -27,7 +27,7 @@ class List extends Component {
       </ul>
     );
   }
-
+  // функция поиска по внешнему API - передаются параметры 1-строка поиска, 2-страница
   fetchByTitle(query, page = 1) {
     let listItems = (<li className="list__item">Empty</li>);
     let isSuccess = false;
@@ -40,14 +40,14 @@ class List extends Component {
         .then(response => response.json())
         .then(data => {
           // console.log(data);
-          if (data.results.length) {
+          if (data) {
             isSuccess = true;
             listItems = data.results.map(item => {
-              let title = item.title;
               let poster = item.poster_path ? (<img src={"https://image.tmdb.org/t/p/w200"+item.poster_path} alt=""/>) : (<h4>no poster</h4>);
               return (
                 <li key={item.id} className="list__item">
-                  <h2>{title}</h2>
+                  <h2>{item.title}</h2>
+                  <h4>{item.id}</h4>
                   {poster}
                 </li>
                 )
@@ -58,7 +58,7 @@ class List extends Component {
         })
         .catch(function(error) {
           console.log('Request failed', error);
-        })
+        });
     }
   }
 }

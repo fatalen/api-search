@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import './style.css';
 import List from '../List'
+import Movie from '../Movie'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       inputSearch: 'cats',
-      searchTitle: null,
+      searchTitle: 'cats',
       searchPage: 1,
-      lastSearchSuccess: false
+      lastSearchSuccess: false,
+      movieId: 10992
     };
     this.handleChange = this.handleChange.bind(this);
     this.searchByTitle = this.searchByTitle.bind(this);
@@ -19,6 +21,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Movie movieId={this.state.movieId} />
         <header>
           <h1>API search</h1>
         </header>
