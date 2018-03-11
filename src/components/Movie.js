@@ -16,7 +16,7 @@ class Movie extends Component {
         <h4 className="movie__rating"></h4>
         <article className="movie__description"></article>
       </div>
-    )
+    );
   }
 }
 

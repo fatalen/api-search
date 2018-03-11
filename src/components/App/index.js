@@ -23,7 +23,7 @@ class App extends Component {
         <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
         <button onClick={this.searchByTitle}>search</button>
         <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
-        <List searchTitle={this.searchTitle}/>
+        <List searchTitle={this.state.searchTitle}/>
         <button>prev page</button>
         <button>next page</button>
         <div>{this.state.inputSearch}</div>
