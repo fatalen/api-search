@@ -7,8 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputSearch: 'cats',
-      searchTitle: 'cats',
+      inputSearch: '',
+      searchTitle: '',
       searchPage: 1,
       lastSearchSuccess: false,
       movieId: null,
@@ -29,10 +29,10 @@ class App extends Component {
           <div className="app__cont">
             <h1>API search (<a href="https://www.themoviedb.org/" target="_blank">themoviedb.org</a>)</h1>
             <form className="app__search">
-              <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
+              <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange} placeholder="type something here.."/>
               <button name="buttonFirstPage" onClick={this.searchByTitle} type="submit">search</button>
             </form>
-            <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
+            <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle+' (page # from ###)' : 'Click to search'}</h4>
           </div>
         </header>
         <main className="app__main">
