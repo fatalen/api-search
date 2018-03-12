@@ -2,10 +2,15 @@
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  /*justify-content: center;*/
   align-items: center;
   margin: 1rem 0;
   padding: 0;
+}
+
+@media only screen and (max-width: 576px) {
+  .list {
+    justify-content: center;
+  }
 }
 
 .list__item {

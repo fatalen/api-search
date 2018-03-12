@@ -8,14 +8,18 @@
   width: 1600px;
   max-width: 100%;
   padding: 0 4rem;
+}
 
-  /*@include bp($bp-md) {
+@media only screen and (max-width: 992px) {
+  .app__cont {
     padding: 0 2rem;
   }
+}
 
-  @include bp($bp-xs) {
+@media only screen and (max-width: 576px) {
+  .app__cont {
     padding: 0 1rem;
-  }*/
+  }
 }
 
 .app__header {

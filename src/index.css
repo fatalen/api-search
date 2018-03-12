@@ -1,8 +1,21 @@
 html {
   color: #222;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  line-height: 1em;
+  font-size: 1em;
+  line-height: 1.4;
   transition: font-size 0.5s ease-in-out;
+}
+
+@media only screen and (max-width: 992px) {
+  html {
+    font-size: 0.875em;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  html {
+    font-size: 0.75em;
+  }
 }
 
 audio,
