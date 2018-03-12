@@ -56,7 +56,7 @@ class App extends Component {
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
   }
-  // поиск по названию - searchTitle и searchPage передаются параметрами в компонент List
+  // поиск по названию - searchTitle и searchPage (передаются параметрами в компонент List)
   searchByTitle(e) {
     e.preventDefault();
     let currentPage = this.state.searchPage;
@@ -78,9 +78,8 @@ class App extends Component {
       lastSearchSuccess: success
     })
   }
-  // функция возвращает id элемента списка
+  // возвращает id элемента списка
   returnMovieId(e) {
-    // console.log(e.currentTarget.dataset.id);
     this.setState({
       movieId: e.currentTarget.dataset.id,
       movieShow: true
