@@ -4,16 +4,19 @@
   list-style: none;
   /*justify-content: center;*/
   align-items: center;
+  margin: 1rem 0;
+  padding: 0;
 }
 
 .list__item {
   position: relative;
   overflow: hidden;
   margin: 1rem;
+  padding: 0;
   background-color: #ddd;
   border-radius: 0.25rem;
-  width: 14rem;
-  min-height: 20rem;
+  width: 16rem;
+  min-height: 23rem;
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s;
@@ -21,6 +24,10 @@
 
 .list__item:hover {
   transform: scale(1.1);
+}
+
+.list__item--empty {
+  margin: 1rem auto;
 }
 
 .list__item img {

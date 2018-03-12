@@ -30,7 +30,7 @@ class List extends Component {
   }
   // функция поиска по внешнему API - передаются параметры 1-строка поиска, 2-страница
   fetchByTitle(query, page = 1) {
-    let listItems = (<li className="list__item">Empty</li>);
+    let listItems = (<li className="list__item list__item--empty"><h4 className="list__item-no-image">nothing found</h4></li>);
     let isSuccess = false;
     if (!query) {
       this.props.searchSuccess(isSuccess);
@@ -40,7 +40,7 @@ class List extends Component {
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          console.log(data.results);
+          // console.log(data.results);
           if (data.results.length) {
             isSuccess = true;
             listItems = data.results.map(item => {

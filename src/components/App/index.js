@@ -11,25 +11,27 @@ class App extends Component {
       searchTitle: 'cats',
       searchPage: 1,
       lastSearchSuccess: false,
-      movieId: null
+      movieId: null,
+      movieShow: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.searchByTitle = this.searchByTitle.bind(this);
     this.searchSuccess = this.searchSuccess.bind(this);
     this.returnMovieId = this.returnMovieId.bind(this);
+    this.movieHide = this.movieHide.bind(this);
   }
 
   render() {
     return (
       <div className="app">
-        <Movie movieId={this.state.movieId} />
+        <Movie movieId={this.state.movieId} movieShow={this.state.movieShow} onClick={this.movieHide}/>
         <header className="app__header">
           <div className="app__cont">
             <h1>API search (<a href="https://www.themoviedb.org/" target="_blank">themoviedb.org</a>)</h1>
-            <div className="app__search">
+            <form className="app__search">
               <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
-              <button name="buttonFirstPage" onClick={this.searchByTitle}>search</button>
-            </div>
+              <button name="buttonFirstPage" onClick={this.searchByTitle} type="submit">search</button>
+            </form>
             <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
           </div>
         </header>
@@ -56,6 +58,7 @@ class App extends Component {
   }
   // поиск по названию - searchTitle и searchPage передаются параметрами в компонент List
   searchByTitle(e) {
+    e.preventDefault();
     let currentPage = this.state.searchPage;
     if (e.target.name === 'buttonPrevPage' && currentPage > 1) {
       currentPage--;
@@ -79,7 +82,15 @@ class App extends Component {
   returnMovieId(e) {
     // console.log(e.currentTarget.dataset.id);
     this.setState({
-      movieId: e.currentTarget.dataset.id
+      movieId: e.currentTarget.dataset.id,
+      movieShow: true
+    })
+  }
+  // закрывает всплывающее окно с информацией
+  movieHide() {
+    console.log(this.state.movieShow);
+    this.setState({
+      movieShow: false
     })
   }
 }
