@@ -21,23 +21,32 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Movie movieId={this.state.movieId} />
-        <header>
-          <h1>API search</h1>
+        <header className="app__header">
+          <div className="app__cont">
+            <h1>API search (<a href="https://www.themoviedb.org/" target="_blank">themoviedb.org</a>)</h1>
+            <div className="app__search">
+              <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
+              <button name="buttonFirstPage" onClick={this.searchByTitle}>search</button>
+            </div>
+            <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
+          </div>
         </header>
-        <input type="text" name="inputSearch" value={this.state.inputSearch} onChange={this.handleChange}/>
-        <button name="buttonFirstPage" onClick={this.searchByTitle}>search</button>
-        <h4>{this.state.searchTitle ? 'Search results by title: '+this.state.searchTitle : 'Click to search'}</h4>
-        <List
-          searchTitle={this.state.searchTitle}
-          searchPage={this.state.searchPage}
-          searchSuccess={this.searchSuccess}
-          returnMovieId={this.returnMovieId}
-        />
-        <button name="buttonPrevPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>prev page</button>
-        <button name="buttonNextPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>next page</button>
-        <div>{this.state.inputSearch}</div>
+        <main className="app__main">
+          <div className="app__cont">
+            <div className="app__sticky">
+              <button name="buttonPrevPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>previous page</button>
+              <button name="buttonNextPage" onClick={this.searchByTitle} disabled={!this.state.lastSearchSuccess}>next page</button>
+            </div>
+            <List
+              searchTitle={this.state.searchTitle}
+              searchPage={this.state.searchPage}
+              searchSuccess={this.searchSuccess}
+              returnMovieId={this.returnMovieId}
+            />
+          </div>
+        </main>
       </div>
     );
   }

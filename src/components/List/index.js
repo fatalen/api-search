@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './style.css';
 
 class List extends Component {
   constructor(props) {
@@ -39,15 +40,15 @@ class List extends Component {
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          // console.log(data);
-          if (data) {
+          console.log(data.results);
+          if (data.results.length) {
             isSuccess = true;
             listItems = data.results.map(item => {
-              let poster = item.poster_path ? (<img src={"https://image.tmdb.org/t/p/w200"+item.poster_path} alt=""/>) : (<h4>no poster</h4>);
+              let poster = item.poster_path ? (<img src={"https://image.tmdb.org/t/p/w300"+item.poster_path} alt=""/>) : (<h4 className="list__item-no-image">no poster</h4>);
+              let date = item.release_date ? '('+(new Date(item.release_date)).getFullYear()+')' : '';
               return (
                 <li key={item.id} className="list__item" data-id={item.id} onClick={this.props.returnMovieId}>
-                  <h2>{item.title}</h2>
-                  <h4>{item.id}</h4>
+                  <h2 className="list__item-header">{item.title} {date}</h2>
                   {poster}
                 </li>
                 )
